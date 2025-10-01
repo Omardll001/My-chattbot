@@ -83,7 +83,7 @@ def get_embedder():
     if _embedder is None:
         os.environ["CUDA_VISIBLE_DEVICES"] = ""  # force CPU
         logger.info("Loading SentenceTransformer model on CPU")
-        _embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2", device="cpu")
+        _embedder = SentenceTransformer("sentence-transformers/paraphrase-MiniLM-L3-v2", device="cpu")
     return _embedder
 
 def get_query_embedding(query: str):

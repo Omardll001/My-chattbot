@@ -219,7 +219,7 @@ knowledge_base = [
 ]
 
 # ------------- Config -------------
-MODEL_NAME = "sentence-transformers/all-MiniLM-L6-v2"  # small, fast and good
+MODEL_NAME = "sentence-transformers/paraphrase-MiniLM-L3-v2"  # small, fast and good
 OUT_DIR = Path("kb_store")
 OUT_DIR.mkdir(exist_ok=True)
 
