@@ -51,7 +51,7 @@ logger = logging.getLogger(__name__)
 
 # --- Flask init ---
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins="*")  # or specify your Vercel domain for more security
 
 # --- OpenAI init ---
 if not OPENAI_API_KEY:
