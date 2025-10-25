@@ -92,7 +92,7 @@ export const MiniChatBot = () => {
   ];
 
   return (
-    <section id="Mini_Chatbot" className="min-h-screen flex items-center justify-center py-20">
+    <section id="Mini_Chatbot" className="min-h-screen flex items-center justify-center py-8 sm:py-12 md:py-16 lg:py-20">
       <RevealOnScroll>
         <div className="w-full max-w-md mx-auto bg-black/80 rounded-xl shadow-lg border border-white/10 p-6 flex flex-col items-center">
           <div className="flex items-center mb-4 space-x-2">

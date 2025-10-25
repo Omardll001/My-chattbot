@@ -46,6 +46,12 @@ GREETING_PATTERNS = [
     r'\bgood evening\b',
 ]
 
+# --- Quick KB lookup patterns ---
+NAME_PATTERNS = [r"\bwhat('?s| is) your name\b", r"\bwho are you\b", r"\bwhat should I call you\b"]
+CONTACT_PATTERNS = [r"\b(contact|email|phone|how can I reach|reach me|contact info)\b"]
+LANGUAGES_PATTERNS = [r"\b(language|languages|speak|speaks|spoken|fluent)\b"]
+EDUCATION_PATTERNS = [r"\b(studied|university|college|degree|education|where did you study)\b"]
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
@@ -127,6 +133,16 @@ def normalize_rows(x):
 kb_embeddings = normalize_rows(kb_embeddings)
 title_embeddings = normalize_rows(title_embeddings)
 
+def find_kb_snippet(keywords):
+    """Return the first KB item (title, summary, text) containing any keyword."""
+    keys = [k.lower() for k in keywords]
+    for it in kb_items:
+        text_blob = " ".join([str(it.get("title","") or ""), str(it.get("summary","") or ""), str(it.get("text","") or "")]).lower()
+        for k in keys:
+            if k in text_blob:
+                return (it.get("title",""), it.get("summary",""), it.get("text",""))
+    return None
+
 def get_top_k(query: str, k: int = TOP_K):
     q = get_query_embedding(query)
     sim_text = np.dot(kb_embeddings, q)
@@ -150,8 +166,13 @@ def get_top_k(query: str, k: int = TOP_K):
 def call_openai_chat(prompt: str, model: str = OPENAI_MODEL, timeout: int = 60):
     if not OPENAI_API_KEY:
         raise RuntimeError("OpenAI API key not configured.")
+    # Clearer system prompt: represent Omar Dalal, use ONLY provided context
     messages = [
-        {"role": "system", "content": "You are an assistant that answers questions about Omar Dalal using ONLY the provided context."},
+        {"role": "system", "content": 
+            "You are an AI assistant representing Omar Dalal. Use ONLY the provided context to answer questions. "
+            "If the answer exists in the context, provide it clearly. If not present, say you don't know. "
+            "When asked for your name or who you are, answer 'Omar Dalal' or 'I am Omar Dalal'. "
+            "If contact information is present in the context, provide it. Do not refuse to share information that is explicitly in the context."},
         {"role": "user", "content": prompt},
     ]
     response = client.chat.completions.create(
@@ -195,6 +216,40 @@ def api_query():
     if not question:
         return jsonify({"error": "Missing question"}), 400
 
+    q_lower = question.lower()
+
+    # Direct intent / KB lookups for exact profile fields
+    for pat in NAME_PATTERNS:
+        if re.search(pat, q_lower):
+            # Represent the owner explicitly
+            return jsonify({"answer": "Omar Dalal"})
+
+    for pat in CONTACT_PATTERNS:
+        if re.search(pat, q_lower):
+            found = find_kb_snippet(["contact", "email", "phone", "contact information", "reach me", "mailto"])
+            if found:
+                title, summary, text = found
+                contact_text = "\n".join([s for s in (summary, text) if s]).strip()
+                return jsonify({"answer": contact_text or "Contact information is present in the profile."})
+            return jsonify({"answer": "No public contact information is present in the knowledge base."})
+
+    for pat in LANGUAGES_PATTERNS:
+        if re.search(pat, q_lower):
+            found = find_kb_snippet(["language", "languages", "speak", "fluent", "spoken"])
+            if found:
+                _, summary, text = found
+                return jsonify({"answer": (summary or text or "Languages are mentioned in the profile.")})
+            break
+
+    for pat in EDUCATION_PATTERNS:
+        if re.search(pat, q_lower):
+            found = find_kb_snippet(["university", "college", "degree", "studied", "education", "bachelor", "master", "msc", "phd", "bth", "blekinge"])
+            if found:
+                _, summary, text = found
+                return jsonify({"answer": (summary or text or "Education is mentioned in the profile.")})
+            break
+
+    # Greeting preserved
     if is_greeting(question):
         return jsonify({"answer": "Hi! 👋 I'm an AI chatbot about Omar Dalal. Ask me anything!"})
 
@@ -212,11 +267,14 @@ def api_query():
                     idxs.append(found_index)
             idxs = idxs[:retrieval_k]
 
+        if not idxs:
+            return jsonify({"answer": "I couldn't find relevant information in the knowledge base."})
+
         top_items = [kb_items[i] for i in idxs]
         context_parts = [f"{it.get('title', '')}: {it.get('summary','')}\n\n{it.get('text','')}" for it in top_items]
         context_str = "\n\n---\n\n".join(context_parts)[:MAX_CONTEXT_CHARS]
 
-        prompt = f"You are an assistant using ONLY the context below.\n\n{context_str}\n\nUser question: \"{question}\""
+        prompt = f"Context:\n\n{context_str}\n\nUser question: \"{question}\""
         stdout = call_openai_chat(prompt, model=OPENAI_MODEL, timeout=OLLAMA_TIMEOUT).strip()
 
         return jsonify({"answer": stdout, "context_used": context_parts})
