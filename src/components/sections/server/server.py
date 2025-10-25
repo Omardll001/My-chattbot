@@ -56,7 +56,7 @@ CORS(app, origins="*")  # or specify your Vercel domain for more security
 # --- OpenAI init ---
 if not OPENAI_API_KEY:
     logger.warning("OPENAI_API_KEY not set. OpenAI calls will fail until configured.")
-openai.api_key = OPENAI_API_KEY
+client = openai.OpenAI(api_key=OPENAI_API_KEY)
 
 # --- Load KB and embeddings ---
 if not KB_ITEMS_PATH.exists() or not KB_EMB_PATH.exists():
@@ -146,28 +146,22 @@ def get_top_k(query: str, k: int = TOP_K):
     idxs = np.argsort(-combined)[:k]
     return idxs, combined[idxs]
 
-# --- OpenAI call helper ---
+# --- OpenAI call helper (new API) ---
 def call_openai_chat(prompt: str, model: str = OPENAI_MODEL, timeout: int = 60):
-    if not openai.api_key:
+    if not OPENAI_API_KEY:
         raise RuntimeError("OpenAI API key not configured.")
     messages = [
         {"role": "system", "content": "You are an assistant that answers questions about Omar Dalal using ONLY the provided context."},
         {"role": "user", "content": prompt},
     ]
-    resp = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model=model,
         messages=messages,
         max_tokens=1024,
         temperature=0.0,
+        timeout=timeout,
     )
-    choices = resp.get("choices", [])
-    if choices and isinstance(choices, list):
-        first = choices[0]
-        if "message" in first and isinstance(first["message"], dict) and "content" in first["message"]:
-            return first["message"]["content"]
-        if "text" in first and isinstance(first["text"], str):
-            return first["text"]
-    return json.dumps(resp, ensure_ascii=False)
+    return response.choices[0].message.content
 
 # --- Flask routes ---
 @app.route("/", methods=["GET"])
@@ -192,6 +186,7 @@ def favicon():
 def api_query_get():
     return jsonify({"error": "POST JSON required"}), 400
 
+# ...existing Flask routes...
 @app.route("/api/query", methods=["POST"])
 def api_query():
     data = request.get_json() or {}
@@ -231,5 +226,5 @@ def api_query():
 
 if __name__ == "__main__":
     host = os.environ.get("FLASK_HOST", "0.0.0.0")
-    port = int(os.environ.get("PORT", 5174))
+    port = int(os.environ.get("PORT", 8080))
     app.run(host=host, port=port, debug=False)
