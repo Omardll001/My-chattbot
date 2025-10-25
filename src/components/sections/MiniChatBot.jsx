@@ -8,7 +8,7 @@ export const MiniChatBot = () => {
   const [input, setInput] = useState("");
   const [processing, setProcessing] = useState(false);
   const scrollRef = useRef(null);
-  const API_BASE = (import.meta && import.meta.env && import.meta.env.VITE_API_URL) || process.env.REACT_APP_API_URL || "http://localhost:5174";
+  const API_BASE = (import.meta && import.meta.env && import.meta.env.VITE_API_URL) || process.env.REACT_APP_API_URL || "http://localhost:8080";
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
