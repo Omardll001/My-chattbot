@@ -15,137 +15,111 @@ export const About = () => {
  // Work experience
 const workExperience = [
   {
+    role: "AFRY Industry — Master Thesis: Automation & AI",
+    period: "Spring 2026",
+    bullets: [
+      "Developing AI-assisted tools to automate and optimize industrial automation projects at AFRY Industry, Malmö.",
+      "Building database-driven generation of PLC/HMI logic and technical documentation using Python/C#, SQL, and AI-based information retrieval.",
+      "Creating AI-based tools to prompt project status and information, improving workflow efficiency in automation projects.",
+    ],
+    image: "/images/afry_logo.png",
+    link: "https://afry.com/",
+  },
+  {
+    role: "Security Clearance — SAAB AB",
+    period: "January 2026",
+    bullets: [
+      "Successfully passed SAAB security clearance, approved for work in security-classified industrial environments.",
+    ],
+    image: "/images/saab_logo.png",
+    link: "https://www.saab.com/",
+  },
+  {
     role: "Humly Solutions AB — QA Developer & Technical Support (Workplace Solutions)",
     period: "December 2024 – June 2026",
     bullets: [
-      "Responsible for quality assurance (QA) of the company's new systems and firmware, performing thorough testing of both software and hardware prior to production deployment.",
-      "Acted as a technical key resource in customer support handling troubleshooting, system analysis and guidance regarding system functionality and API integrations.",
-      "Contributed to problem solving and product development thanks to deep understanding of the full system stack — from cloud-based backend services to physical devices.",
+      "Led QA testing of firmware, software, and hardware before production.",
+      "Acted as a key technical resource in customer support: troubleshooting, system analysis, API guidance.",
+      "Worked across the stack from cloud-based backend to physical devices.",
     ],
     image: "/images/Humly_Logo.png",
     link: "https://humly.com",
   },
   {
-    role: "Outliar — Python Developer (AI company, remote)",
-    period: "February 2025 – June 2025",
+    role: "IKEA (INGKA Group) — AI & Systems Engineering Project",
+    period: "September 2025 – December 2025",
     bullets: [
-      "Developed advanced Python tools to improve AI models' ability to write, understand and analyze code.",
-      "Worked on code generation, semantic understanding, refactoring and code analysis pipelines to increase model precision and usability.",
-      "Built custom tooling and pipelines for processing and interpreting codebases, improving AI-driven software engineering workflows.",
+      "Developed a Model Context Protocol (MCP) Server to improve developer productivity and observability across IKEA's engineering ecosystem.",
+      "Built and deployed a Dockerized architecture ensuring consistency, scalability, and version control across environments.",
+      "Engaged directly with IKEA engineers through weekly technical meetings, on-site collaboration in Malmö, and multiple demo sessions.",
     ],
-    image: "/images/outliar_logo.png",
-    link: "https://outlier.ai/",
+    image: "/images/ikea_logo.png",
+    link: "https://www.ikea.com/",
   },
   {
     role: "Meliox AB — AI Project Collaboration / Internship",
     period: "January 2025 – June 2025",
     bullets: [
-      "Led an AI project for sensor classification within building automation systems.",
-      "Developed machine learning solutions for automatic identification and categorization of various sensor types.",
-      "Responsibilities included data collection, preprocessing, model selection, implementation and testing, and integration into company systems for improved energy management.",
+      "Led ML project for smart building sensor classification.",
+      "Collected, preprocessed, and modeled 3M+ sensor data points; deployed a highly accurate classifier.",
     ],
     image: "/images/meliox_logo.png",
     link: "https://meliox.se/",
   },
   {
+    role: "Outliar — AI Developer (Remote)",
+    period: "February 2025 – June 2025",
+    bullets: [
+      "Developed Python pipelines for AI code generation, semantic understanding, refactoring, and analysis.",
+      "Improved precision and usability of AI models for programming tasks.",
+    ],
+    image: "/images/outliar_logo.png",
+    link: "https://outlier.ai/",
+  },
+  {
     role: "Running own business & System Developer — Grocery Store (Östra Göinge)",
     period: "July 2021 – June 2025",
     bullets: [
-      "Responsible for accounting tasks, auditor work, financial maintenance and filing of business income and expenditure.",
-      "Built and maintained a custom system for the grocery store to track products, income, expenses and other store-specific functionality, including ongoing maintenance of the system.",
+      "Built and maintained custom ERP system for inventory, sales, and financials.",
+      "Managed accounting, auditing, and financial reporting.",
     ],
     image: "/images/ostragoinge_logo.png",
     link: "https://ostragoinge.se/",
   },
   {
-    role: "Automotive Software & Diagnostics Specialist — (Freelance) Karlskrona",
+    role: "Automotive Software & Diagnostics Specialist — Freelance, Karlskrona",
     period: "June 2023 – June 2024",
     bullets: [
-      "Diagnosed vehicles, identified and fixed problems, ordered and replaced required spare parts.",
-      "Specialized in digital vehicle diagnostics and ECU programming, ensuring correct operation of electronicsystems and functionality of different car parts.",
+      "Specialized in digital vehicle diagnostics and ECU programming, ensuring correct operation of electronic systems and functionality of different car parts.",
     ],
     image: "/images/kna_logo.png",
     link: "https://www.karlskrona.se/",
   },
   {
-    role: "Assistant Nurse (Night Patrol) — Karlskrona Municipality",
-    period: "November 2022 – May 2023",
-    bullets: [
-      "Provided personal care, support and assistance to clients in their homes as part of home care services.",
-    ],
-    image: "/images/kna_logo.png",
-    link: "https://www.karlskrona.se/",
-  },
-  {
-    role: "Patient Guard — Hässleholm Hospital",
-    period: "October 2020 – August 2021",
-    bullets: [
-      "Temporary employment providing assistance to patients with special needs in daily activities.",
-    ],
-    image: "/images/hslm_kommun.png",
-    link: "https://www.hassleholm.se/",
-  },
-  {
-    role: "Service Staff — Hässleholm Hospital",
-    period: "June 2020 – August 2020",
-    bullets: [
-      "Responsible for transport duties in June, and cleaning and facility maintenance in July and August.",
-    ],
-    image: "/images/hslm_kommun.png",
-    link: "https://www.hassleholm.se/",
-  },
-  {
-    role: "Support Technician & Furniture Assembler — Hemfixarna AB",
+    role: "Hemfixarna AB — Support Technician & Furniture Assembler",
     period: "December 2019 – August 2020",
     bullets: [
-      "Assembled various types of furniture and provided technical support for hardware and software.",
+      "Provided technical support for hardware and software troubleshooting.",
+      "Assembled and mounted various types of furniture.",
     ],
     image: "/images/hemfixarna.png",
     link: "https://hemfixarna.se/",
-  },
-  {
-    role: "Assembler — Glentons AB",
-    period: "November 2019 – January 2020",
-    bullets: [
-      "Provided technical support for hardware and software troubleshooting.",
-      "Assembled various types of sports trophies and awards.",
-    ],
-    image: "/images/glentons.png",
-    link: "https://www.glentons.se/",
-  },
-  {
-    role: "Seasonal Worker — Agneberg Preschool (Hanaskog)",
-    period: "June 2018 – August 2018",
-    bullets: [
-      "Assisted in the kitchen with cleaning, dishwashing and cooking.",
-    ],
-    image: "/images/ostragoinge_logo.png",
-    link: "https://ostragoinge.se/",
-  },
-  {
-    role: "Intern — Vingården Pizzeria (Osby)",
-    period: "November 2016 – December 2016",
-    bullets: [
-      "Internship as a cook and dishwasher assisting daily kitchen operations.",
-    ],
-    image: "/images/osby_kommun.png",
-    link: "https://www.osby.se/",
   },
 ];
 
 
   const education = [
     {
-      degree: "M.Sc. in Engineering — AI & ML",
+      degree: "M.Sc. in Engineering — AI & Machine Learning",
       school: "Blekinge Institute of Technology (BTH)",
-      period: "2021 – expected 2026",
-      details: "Program covering AI/ML, computer science, engineering, IT security, and software development.",
+      period: "2021 – 2026",
+      details: "Key areas: Advanced Machine Learning, Deep Learning, AI Security, Software Architecture, Data Mining, Robotics, Cloud Technologies.",
     },
     {
-      degree: "Technology Programme",
-      school: "High School Education",
-      period: "",
-      details: "",
+      degree: "Master Thesis — Automation & AI (AFRY)",
+      school: "AFRY Industry, Malmö",
+      period: "Spring 2026",
+      details: "Development of AI-assisted tools to automate and optimize industrial automation projects, including database-driven generation of PLC/HMI logic and technical documentation using Python/C#, SQL, and AI-based information retrieval.",
     },
   ];
 
@@ -185,7 +159,7 @@ const workExperience = [
               <div>
                 <h3 className="text-xl font-bold mb-3">Profile</h3>
                 <p className="text-gray-300">
-                  Master of Science in Engineering in AI & ML at BTH (5th and final year). Strong programming in Python, C, Java, and experience in advanced ML, AI security, genetic algorithms, and object tracking (YOLO). Experienced with cloud tools (Docker, GitHub), ERP system maintenance, and mechanical/automotive work. Fluent in Swedish, English, Arabic; basic Turkish.
+                  M.Sc. Engineering student in AI & Machine Learning at BTH, final year. Strong foundation in Python, C, Java, software engineering principles, AI systems, automation-related programming, and data-driven solutions. Experienced in applied machine learning, AI security, genetic algorithms, computer vision, and cloud technologies (Docker, GCP).
                 </p>
               </div>
             </div>
@@ -224,7 +198,7 @@ const workExperience = [
 
           {/* Education & Languages */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            <div className="p-8 rounded-xl border-white/10 border hover:-translate-y-1 transition-all max-h-96 overflow-y-auto">
+            <div className="p-8 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
               <h3 className="text-2xl font-bold mb-4 p-3 rounded shadow-md">Education</h3>
               <ul className="list-disc list-inside text-gray-300 space-y-4 mt-4">
                 {education.map((e, i) => (
@@ -238,7 +212,7 @@ const workExperience = [
               </ul>
             </div>
 
-            <div className="p-8 rounded-xl border-white/10 border hover:-translate-y-1 transition-all max-h-96 overflow-y-auto">
+            <div className="p-8 rounded-xl border-white/10 border hover:-translate-y-1 transition-all">
               <h3 className="text-2xl font-bold mb-4 p-3 rounded shadow-md">Languages</h3>
               <ul className="list-disc list-inside text-gray-300 space-y-4 mt-4">
                 {languages.map((l, i) => (

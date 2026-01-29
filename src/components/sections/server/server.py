@@ -21,16 +21,16 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "").strip()
 OPENAI_MODEL = os.environ.get("OPENAI_MODEL", "gpt-3.5-turbo").strip()
 
 OLLAMA_TIMEOUT = 120
-TOP_K = int(os.environ.get("TOP_K", 3))
-MAX_CONTEXT_CHARS = 4000
+TOP_K = int(os.environ.get("TOP_K", 5))  # Increased to get more context
+MAX_CONTEXT_CHARS = 6000  # Increased to include more information
 
-ALPHA_TEXT = 0.7
-BETA_TITLE = 1.2
-GAMMA_PRIORITY = 1.0
+ALPHA_TEXT = 0.8  # Increased weight on text content
+BETA_TITLE = 1.0
+GAMMA_PRIORITY = 1.2  # Increased priority weight
 RECENCY_BASE_YEAR = 2018
-RECENCY_SCALE = 0.03
+RECENCY_SCALE = 0.05
 
-ID_BOOSTS = {"humly": 1.0, "outliar": 0.9, "meliox": 0.3}
+ID_BOOSTS = {"humly": 1.5, "outliar": 1.3, "meliox": 0.5, "skills": 2.0, "education": 1.5, "contact": 1.5, "languages": 1.5}
 
 WORK_INTENT_PATTERNS = [
     r"\b(work|experience|job|employed|role|intern|position|worked|employment|professional experience)\b",
@@ -46,11 +46,7 @@ GREETING_PATTERNS = [
     r'\bgood evening\b',
 ]
 
-# --- Quick KB lookup patterns ---
-NAME_PATTERNS = [r"\bwhat('?s| is) your name\b", r"\bwho are you\b", r"\bwhat should I call you\b"]
-CONTACT_PATTERNS = [r"\b(contact|email|phone|how can I reach|reach me|contact info)\b"]
-LANGUAGES_PATTERNS = [r"\b(language|languages|speak|speaks|spoken|fluent)\b"]
-EDUCATION_PATTERNS = [r"\b(studied|university|college|degree|education|where did you study)\b"]
+NAME_PATTERNS = [r"\bwhat('?s| is) your name\b", r"\bwho are you\b"]
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -103,16 +99,6 @@ def get_query_embedding(query: str):
     return q
 
 # --- Helper functions ---
-def find_kb_snippet(keywords):
-    """Return the first KB item (title, summary, text) containing any keyword."""
-    keys = [k.lower() for k in keywords]
-    for it in kb_items:
-        text_blob = " ".join([str(it.get("title","") or ""), str(it.get("summary","") or ""), str(it.get("text","") or "")]).lower()
-        for k in keys:
-            if k in text_blob:
-                return (it.get("title",""), it.get("summary",""), it.get("text",""))
-    return None
-
 def is_greeting(text: str) -> bool:
     if not text:
         return False
@@ -167,16 +153,18 @@ def call_openai_chat(prompt: str, model: str = OPENAI_MODEL, timeout: int = 60):
         raise RuntimeError("OpenAI API key not configured.")
     messages = [
         {"role": "system", "content":
-            "You are an assistant representing Omar Dalal. Use ONLY the provided context to answer. "
-            "If the answer exists in the context, return it. If not present, say you don't know. "
-            "When asked for the name, answer 'Omar Dalal'. Only provide contact details if they are explicitly present in the provided context."},
+            "You are Omar Dalal's portfolio assistant. Use the provided context to answer questions accurately. "
+            "The context contains verified information about Omar's background, skills, experience, education, and projects. "
+            "Always prioritize information from the context. If asked about Omar's name, respond 'Omar Dalal'. "
+            "Be conversational, helpful, and provide detailed answers when the context supports it. "
+            "If the context doesn't contain the answer, say you don't have that information."},
         {"role": "user", "content": prompt},
     ]
     response = client.chat.completions.create(
         model=model,
         messages=messages,
-        max_tokens=1024,
-        temperature=0.0,
+        max_tokens=1500,
+        temperature=0.3,
         timeout=timeout,
     )
     return response.choices[0].message.content
@@ -214,69 +202,68 @@ def api_query():
 
     q_lower = question.lower()
 
-    # Direct intent / KB lookups for exact profile fields
+    # Only handle explicit name questions directly
     for pat in NAME_PATTERNS:
         if re.search(pat, q_lower):
-            return jsonify({"answer": "Omar Dalal"})
-
-    for pat in CONTACT_PATTERNS:
-        if re.search(pat, q_lower):
-            found = find_kb_snippet(["contact", "email", "phone", "contact information", "reach me", "mailto"])
-            if found:
-                title, summary, text = found
-                contact_text = "\n".join([s for s in (summary, text) if s]).strip()
-                return jsonify({"answer": contact_text or "Contact information is present in the profile."})
-            return jsonify({"answer": "No public contact information is present in the knowledge base."})
-
-    for pat in LANGUAGES_PATTERNS:
-        if re.search(pat, q_lower):
-            found = find_kb_snippet(["language", "languages", "speak", "fluent", "spoken"])
-            if found:
-                _, summary, text = found
-                return jsonify({"answer": (summary or text or "Languages are mentioned in the profile.")})
-            break
-
-    for pat in EDUCATION_PATTERNS:
-        if re.search(pat, q_lower):
-            found = find_kb_snippet(["university", "college", "degree", "studied", "education", "bachelor", "master", "msc", "phd"])
-            if found:
-                _, summary, text = found
-                return jsonify({"answer": (summary or text or "Education is mentioned in the profile.")})
-            break
+            return jsonify({"answer": "I'm Omar Dalal's portfolio assistant. You can ask me about Omar's skills, experience, projects, education, and more!"})
 
     if is_greeting(question):
-        return jsonify({"answer": "Hi! 👋 I'm an AI chatbot about Omar Dalal. Ask me anything!"})
+        return jsonify({"answer": "Hi! 👋 I'm Omar Dalal's portfolio assistant. Ask me anything about Omar's experience, skills, projects, or background!"})
 
     work_query = is_work_intent(question)
-    retrieval_k = top_k if not work_query else max(top_k, 5)
+    retrieval_k = max(top_k, 7) if work_query else top_k
 
     try:
         idxs, scores = get_top_k(question, retrieval_k)
         idxs = list(idxs)
 
+        # For work queries, ensure key work experiences are included
         if work_query:
             for fid in ("humly", "outliar"):
                 found_index = next((i for i, it in enumerate(kb_items) if it.get("id") == fid), None)
                 if found_index is not None and found_index not in idxs:
                     idxs.append(found_index)
-            idxs = idxs[:retrieval_k]
+            idxs = idxs[:min(len(idxs), 10)]
 
         if not idxs:
-            return jsonify({"answer": "I couldn't find relevant information in the knowledge base."})
+            return jsonify({"answer": "I couldn't find relevant information in my knowledge base about that."})
 
         top_items = [kb_items[i] for i in idxs]
-        context_parts = [f"{it.get('title', '')}: {it.get('summary','')}\n\n{it.get('text','')}" for it in top_items]
-        context_str = "\n\n---\n\n".join(context_parts)[:MAX_CONTEXT_CHARS]
+        
+        # Build rich context with clear structure
+        context_parts = []
+        for it in top_items:
+            title = it.get('title', '')
+            summary = it.get('summary', '')
+            text = it.get('text', '')
+            
+            part = f"## {title}\n"
+            if summary:
+                part += f"**Summary:** {summary}\n\n"
+            if text:
+                part += f"{text}\n"
+            context_parts.append(part)
+        
+        context_str = "\n---\n".join(context_parts)[:MAX_CONTEXT_CHARS]
 
-        prompt = f"Context:\n\n{context_str}\n\nUser question: \"{question}\""
+        prompt = f"""Based on the following verified information about Omar Dalal, answer the user's question accurately and conversationally.
+
+Context:
+{context_str}
+
+User question: "{question}"
+
+Provide a helpful, detailed answer based on the context above."""
+
         stdout = call_openai_chat(prompt, model=OPENAI_MODEL, timeout=OLLAMA_TIMEOUT).strip()
 
-        return jsonify({"answer": stdout, "context_used": context_parts})
+        return jsonify({"answer": stdout, "sources": [it.get('title', '') for it in top_items[:3]]})
     except Exception as e:
         logger.exception("Unhandled error")
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     host = os.environ.get("FLASK_HOST", "0.0.0.0")
-    port = int(os.environ.get("PORT", 8080))
+    # Render requires PORT=10000, but we'll use it if provided, otherwise fallback to FLASK_PORT
+    port = int(os.environ.get("PORT", os.environ.get("FLASK_PORT", 8080)))
     app.run(host=host, port=port, debug=False)

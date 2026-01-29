@@ -2,14 +2,18 @@
   {
     "id": "profile",
     "title": "Profile summary",
-    "text": "Master of Science in Engineering in AI and Machine Learning at BTH (4th year). Strong programming skills in Python, C and Java. Experienced in machine learning, security in AI systems, genetic algorithms and object tracking (YOLO). Familiar with cloud technologies (Docker, GCP) and GitHub. Practical experience maintaining ERP systems and automotive/mechanical work. Interested in ML systems, software engineering and secure AI.",
-    "summary": "Master of Science in Engineering in AI and Machine Learning at BTH (4th year).",
+    "text": "M.Sc. Engineering student in Artificial Intelligence and Machine Learning at Blekinge Institute of Technology (BTH), final year. Strong foundation in Python, C, Java, software engineering principles, AI systems, automation-related programming, and data-driven solutions. Experienced in applied machine learning, AI security, genetic algorithms, computer vision and cloud technologies (Docker, GCP). Currently doing Master Thesis at AFRY Industry in Malmö on Automation & AI.",
+    "summary": "M.Sc. Engineering student in AI and Machine Learning at BTH, final year.",
     "tags": [
       "profile",
-      "summary"
+      "summary",
+      "about",
+      "me",
+      "background",
+      "who"
     ],
-    "year": null,
-    "priority": 0.0
+    "year": 2026,
+    "priority": 1.0
   },
   {
     "id": "contact",
@@ -18,89 +22,135 @@
     "summary": "Contact information: Email: omar.dalal.2001@gmail.com.",
     "tags": [
       "contact",
-      "info"
+      "info",
+      "email",
+      "phone",
+      "address"
     ],
     "year": 2001,
-    "priority": 0.0
+    "priority": 0.8
   },
   {
     "id": "education_bth",
     "title": "Education — Blekinge Institute of Technology (BTH)",
-    "text": "M.Sc. in Engineering — AI & Machine Learning at Blekinge Institute of Technology (BTH). Study period: 2021 – expected 2026.",
-    "summary": "M.Sc.",
+    "text": "M.Sc. in Engineering — AI & Machine Learning at Blekinge Institute of Technology (BTH). Study period: 2021 – 2026 (final year). Key areas: Advanced Machine Learning, Deep Learning, AI Security, Software Architecture, Data Mining, Robotics, Cloud Technologies.",
+    "summary": "M.Sc. in Engineering — AI & Machine Learning at BTH (2021-2026).",
     "tags": [
       "education",
       "blekinge",
       "institute",
       "technology",
-      "bth"
+      "bth",
+      "university",
+      "degree",
+      "master"
     ],
     "year": 2026,
-    "priority": 0.35
+    "priority": 0.9
   },
   {
-    "id": "education_highschool",
-    "title": "Education — Technology Programme (High School)",
-    "text": "Completed the Technology Programme in upper secondary school (Technology programme).",
-    "summary": "Completed the Technology Programme in upper secondary school (Technology programme).",
+    "id": "master_thesis_afry",
+    "title": "Master Thesis — Automation & AI at AFRY Industry",
+    "text": "Master Thesis at AFRY Industry, Malmö (Spring 2026). Development of AI-assisted tools to automate and optimize industrial automation projects. Building database-driven generation of PLC/HMI logic and technical documentation using Python/C#, SQL, and AI-based information retrieval. Creating AI-based tools to prompt project status and information. AFRY is a leading engineering company offering services in technology, design, digitalization and consulting with expertise in industry, energy and infrastructure.",
+    "summary": "Master Thesis at AFRY Industry — Automation & AI (Spring 2026).",
     "tags": [
-      "education",
-      "technology",
-      "programme",
-      "high",
-      "school"
+      "thesis",
+      "afry",
+      "master",
+      "automation",
+      "industrial",
+      "plc",
+      "hmi",
+      "malmö",
+      "exjobb"
     ],
-    "year": null,
-    "priority": 0.0
+    "year": 2026,
+    "priority": 1.0
+  },
+  {
+    "id": "saab_clearance",
+    "title": "Security Clearance — SAAB AB",
+    "text": "Successfully passed SAAB security clearance (January 2026), approved for work in security-classified industrial environments.",
+    "summary": "SAAB Security Clearance (January 2026).",
+    "tags": [
+      "saab",
+      "security",
+      "clearance",
+      "classified"
+    ],
+    "year": 2026,
+    "priority": 0.85
   },
   {
     "id": "humly",
-    "title": "Humly Solutions AB — QA & Technical Support (Workplace Solutions)",
-    "text": "Humly Solutions AB — December 2024 – June 2026. Responsible for quality assurance (QA) of new systems and firmware, performing thorough tests of software and hardware before production. Acted as a technical key resource in customer support handling troubleshooting, system analysis and guidance on system functionality and API integrations. Contributed across the stack from cloud-based backend services to physical devices.",
+    "title": "Humly Solutions AB — QA Developer & Technical Support (Workplace Solutions)",
+    "text": "Humly Solutions AB — December 2024 – June 2026. QA Developer & Technical Support (Workplace Solutions). Led QA testing of firmware, software, and hardware before production. Acted as a key technical resource in customer support: troubleshooting, system analysis, API guidance. Worked across the stack from cloud-based backend to physical devices.",
     "summary": "Humly Solutions AB — December 2024 – June 2026.",
     "tags": [
       "humly",
       "solutions",
       "technical",
       "support",
-      "workplace"
+      "workplace",
+      "qa",
+      "developer"
     ],
     "year": 2026,
-    "priority": 1.0
+    "priority": 0.9
+  },
+  {
+    "id": "ikea",
+    "title": "IKEA (INGKA Group) — AI & Systems Engineering Project",
+    "text": "IKEA (INGKA Group) — September 2025 – December 2025. AI & Systems Engineering Project (Industry Collaboration). Developed a Model Context Protocol (MCP) Server to improve developer productivity and observability across IKEA's engineering ecosystem. Built and deployed a Dockerized architecture ensuring consistency, scalability, and version control across environments. Engaged directly with IKEA engineers through weekly technical meetings, on-site collaboration in Malmö, and multiple demo sessions.",
+    "summary": "IKEA — AI & Systems Engineering Project (Sep 2025 – Dec 2025).",
+    "tags": [
+      "ikea",
+      "ingka",
+      "mcp",
+      "server",
+      "docker",
+      "work",
+      "experience"
+    ],
+    "year": 2025,
+    "priority": 0.85
   },
   {
     "id": "outliar",
-    "title": "Outliar — Python Developer (AI company, remote)",
-    "text": "Outliar — February 2025 – June 2025. Developed advanced Python programs to improve AI models' abilities to write, understand and analyze code. Projects included code generation, semantic understanding, refactoring, and code analysis pipelines to improve model precision and usability.",
-    "summary": "Outliar — February 2025 – June 2025.",
+    "title": "Outliar — AI Developer (Remote)",
+    "text": "Outliar — February 2025 – June 2025. AI Developer (Remote). Developed Python pipelines for AI code generation, semantic understanding, refactoring, and analysis. Improved precision and usability of AI models for programming tasks.",
+    "summary": "Outliar — AI Developer (Feb 2025 – Jun 2025).",
     "tags": [
       "outliar",
       "python",
       "developer",
       "company",
-      "remote"
+      "remote",
+      "ai"
     ],
     "year": 2025,
-    "priority": 0.9
+    "priority": 0.8
   },
   {
     "id": "meliox",
     "title": "Meliox AB — AI Project Collaboration / Internship",
-    "text": "Meliox AB — January 2025 – June 2025. Led an AI project for sensor classification within smart building systems. Tasks included data collection, preprocessing, model selection, implementation and testing. The solution helped automate sensor identification and integration into company systems for energy management and automation.",
+    "text": "Meliox AB — January 2025 – June 2025. Led ML project for smart building sensor classification. Collected, preprocessed, and modeled 3M+ sensor data points; deployed a highly accurate classifier.",
     "summary": "Meliox AB — January 2025 – June 2025.",
     "tags": [
       "meliox",
       "project",
       "collaboration",
-      "internship"
+      "internship",
+      "sensor",
+      "classification"
     ],
     "year": 2025,
-    "priority": 0.3
+    "priority": 0.75
   },
   {
     "id": "self_grocery",
-    "title": "Self-employed & System Developer — Grocery store (Östra Göinge)",
-    "text": "Self-employed & System Developer — July 2021 – June 2025. Responsible for accounting, auditing, financial maintenance and declarations. Built and maintained a custom system for the grocery store to track inventory, incomes, expenses and other shop-specific functionality, and handled ongoing system maintenance.",
+    "title": "Running own business & System Developer — Grocery Store (Östra Göinge)",
+    "text": "Running own business & System Developer — July 2021 – June 2025. Built and maintained custom ERP system for inventory, sales, and financials. Managed accounting, auditing, and financial reporting.",
     "summary": "Self-employed & System Developer — July 2021 – June 2025.",
     "tags": [
       "self",
@@ -109,24 +159,26 @@
       "developer",
       "grocery",
       "store",
-      "stra",
-      "inge"
+      "erp",
+      "business"
     ],
     "year": 2025,
-    "priority": 0.0
+    "priority": 0.5
   },
   {
-    "id": "automotive_mechanic",
-    "title": "Automotive Mechanic — Karlskrona",
-    "text": "Automotive Mechanic — June 2023 – June 2024. Diagnosed vehicles, identified and fixed problems, ordered and replaced parts, and ensured vehicles operated correctly through repairs and maintenance.",
-    "summary": "Automotive Mechanic — June 2023 – June 2024.",
+    "id": "automotive_specialist",
+    "title": "Automotive Software & Diagnostics Specialist — Freelance, Karlskrona",
+    "text": "Automotive Software & Diagnostics Specialist — Freelance, Karlskrona (June 2023 – June 2024). Specialized in digital vehicle diagnostics and ECU programming, ensuring correct operation of electronic systems and functionality of different car parts.",
+    "summary": "Automotive Diagnostics Specialist — June 2023 – June 2024.",
     "tags": [
       "automotive",
-      "mechanic",
+      "diagnostics",
+      "ecu",
+      "freelance",
       "karlskrona"
     ],
     "year": 2024,
-    "priority": 0.0
+    "priority": 0.4
   },
   {
     "id": "assistant_nurse",
@@ -425,13 +477,19 @@
   {
     "id": "languages",
     "title": "Languages",
-    "text": "Swedish (Fluent), English (Fluent), Arabic (Fluent), Turkish (Basic).",
+    "text": "Languages spoken: Swedish (Fluent), English (Fluent), Arabic (Fluent), Turkish (Basic).",
     "summary": "Swedish (Fluent), English (Fluent), Arabic (Fluent), Turkish (Basic).",
     "tags": [
-      "languages"
+      "languages",
+      "speak",
+      "swedish",
+      "english",
+      "arabic",
+      "turkish",
+      "fluent"
     ],
     "year": null,
-    "priority": 0.0
+    "priority": 0.6
   },
   {
     "id": "misc_availability",

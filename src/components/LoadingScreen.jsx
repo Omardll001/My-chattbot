@@ -1,4 +1,3 @@
-import { time } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export const LoadingScreen = ({ onComplete }) => {

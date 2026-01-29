@@ -10,7 +10,30 @@ export const Projects = () => {
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {/* 4. AI Chatbot for Recruiters (Portfolio Integration) */}
+            {/* 1. AFRY Master Thesis - Automation & AI */}
+            <div className="rounded-xl p-4 sm:p-6 border-white/10 border hover:-translate-y-1 transition-all hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)]">
+              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Master Thesis: Automation & AI (AFRY)</h3>
+              <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
+                Developing AI-assisted tools at AFRY Industry to automate and optimize industrial automation projects. Building database-driven generation of PLC/HMI logic and technical documentation using Python/C#, SQL, and AI-based information retrieval.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
+                {["Python", "C#", "SQL", "AI", "PLC", "HMI", "Automation"].map((skill, index) => (
+                  <span
+                    key={index}
+                    className="bg-blue-500/10 text-blue-300 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm hover:bg-blue-500/20 hover:shadow-[0_2px_8px_rgba(59,130,246,0.2)]"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+              <div className="flex justify-between items-center">
+                <a href="https://afry.com/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline text-sm sm:text-base">
+                  Learn more about AFRY →
+                </a>
+              </div>
+            </div>
+
+            {/* 2. AI Chatbot for Recruiters (Portfolio Integration) */}
             <div className="rounded-xl p-4 sm:p-6 border-white/10 border hover:-translate-y-1 transition-all hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)]">
               <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">AI Chatbot for Recruiters</h3>
               <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
@@ -33,7 +56,7 @@ export const Projects = () => {
               </div>
             </div>
 
-            {/* 2. Object Tracking of Football Players */}
+            {/* 3. Object Tracking of Football Players */}
             <div className="rounded-xl p-4 sm:p-6 border-white/10 border hover:-translate-y-1 transition-all hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)]">
               <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Object Tracking of Football Players</h3>
               <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
@@ -71,7 +94,7 @@ export const Projects = () => {
 
             {/* 4. RAG System for IKEA */}
             <div className="rounded-xl p-4 sm:p-6 border-white/10 border hover:-translate-y-1 transition-all hover:border-blue-500/30 hover:shadow-[0_2px_8px_rgba(59,130,246,0.1)]">
-              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">RAG System for IKEA</h3>
+              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">RAG System / MCP Server for IKEA</h3>
               <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
                 Designed a Retrieval-Augmented Generation (RAG) tool with a knowledge base of engineering standards to help IKEA developers adopt standard workflows and reusable components. Features include contextual recommendations, security compliance, and scalable architecture supporting 4000+ users.
               </p>
