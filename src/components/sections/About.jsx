@@ -57,14 +57,14 @@ const workExperience = [
     link: "https://www.ikea.com/",
   },
   {
-    role: "Meliox AB — AI Project Collaboration / Internship",
+    role: "Swegon Group AB — AI Project Collaboration / Internship",
     period: "January 2025 – June 2025",
     bullets: [
       "Led ML project for smart building sensor classification.",
       "Collected, preprocessed, and modeled 3M+ sensor data points; deployed a highly accurate classifier.",
     ],
-    image: "/images/meliox_logo.png",
-    link: "https://meliox.se/",
+    image: "/images/swegon_logo.png",
+    link: "https://www.swegon.com/",
   },
   {
     role: "Outliar — AI Developer (Remote)",
@@ -77,7 +77,7 @@ const workExperience = [
     link: "https://outlier.ai/",
   },
   {
-    role: "Running own business & System Developer — Grocery Store (Östra Göinge)",
+    role: "Running own business & System Developer — Own Store (Östra Göinge)",
     period: "July 2021 – June 2025",
     bullets: [
       "Built and maintained custom ERP system for inventory, sales, and financials.",
